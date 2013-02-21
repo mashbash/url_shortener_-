@@ -1,0 +1,24 @@
+<style type="text/css">
+  .container {
+    margin: 20px auto;
+    width: 600px;
+    padding: 0px 20px 20px 20px;
+    border: 1px dotted black;
+  }
+  th {
+    text-align: left;
+  }
+</style>
+
+<div class="container">
+  <h1>Welcome to your secret page, <%= @user.first_name %>!</h1>
+  <p>Here ist your special secret information:</p>
+    Your user id is: <%= @user.id %>
+    <br><br>
+
+  <form action="/logout" method="post">
+    <input type='submit' value='logout'>
+  </form>
+
+
+</div>

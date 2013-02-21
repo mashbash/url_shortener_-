@@ -1,0 +1,16 @@
+<html>
+<HEAD>
+    <link rel="stylesheet" href="/css/application.css" type="text/css">
+  </HEAD>
+<body>
+  <h2>&nbsp;Al URLs</h2>
+    <ul>
+      <% @urls.each do |url| %>
+        <li>Long URL: &nbsp;<a href=<%= url.long_url %>><%= url.long_url %> </a><br>
+            Short URL:&nbsp;<a href=<%= url.short_url %> >http://localhost:9292/<%= url.short_url %> </a>
+            <br><br>
+        </li>
+      <% end %>
+    </ul>
+</body>
+</html>
