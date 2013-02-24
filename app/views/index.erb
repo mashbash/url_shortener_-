@@ -14,14 +14,21 @@
   <h1>Welcome to our Secret App!</h1>
   <p>Lets login!</p>
   <form action="/login" method="post">
-    <input size = "30" type="text" name="email" placeholder='Enter your email...'>
+    <input size = "30" type="email" name="email" placeholder='Enter your email...'>
     <br><br>
-    <input size = "30" type="text" name="password" placeholder='Enter your password...'>
+    <input size = "30" type="password" name="password" placeholder='Enter your password...'>
     <br><br>
     <input type='submit'>
   </form>
   <br><br>
   <p>If you don't have an account, let's create one!</p>
+    <% if @user && @user.errors %>
+      <%= @user.errors.full_messages.join('<br>') %>
+    <% end %>
+
+    <% if @message[:notice] %>
+      <%= @message[:notice] %>
+    <% end %>
   <form action="/new" method="post">
     <input size = "30" type="text" name="first_name" placeholder='Enter your first name...'>
     <br><br>

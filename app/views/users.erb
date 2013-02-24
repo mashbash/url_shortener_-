@@ -12,9 +12,33 @@
 
 <div class="container">
   <h1>Welcome to your secret page, <%= @user.first_name %>!</h1>
-  <p>Here ist your special secret information:</p>
-    Your user id is: <%= @user.id %>
+  <h2>Shorten your URLs</h2>
+    <div class="form">
+  <form action="/urls" method="post">
+    <% if @url && @url.errors %>
+    <div id="error"><%= @url.errors.messages[:long_url].first %></div>
+    <br>
+    <% end %>
+    <input size = "40" type="text" name="long_url" placeholder='Put your long url in here...'>
     <br><br>
+
+    <input type="submit" class='input'>
+  </form>
+
+  <h2>All your URLs</h2>
+   <ul>
+     <% @urls.each do |url| %>
+       <li>Long URL: &nbsp;<a href=<%= url.long_url %>><%= url.long_url %> </a><br>
+           Short URL:&nbsp;<a href=<%= url.short_url %> >http://localhost:9292/<%= url.short_url %> </a>
+           <br><br>
+       </li>
+     <% end %>
+   </ul>
+</div>
+
+
+
+
 
   <form action="/logout" method="post">
     <input type='submit' value='logout'>

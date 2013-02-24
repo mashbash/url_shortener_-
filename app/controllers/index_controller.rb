@@ -1,8 +1,12 @@
 enable :sessions
 
+before do
+  @message = {}
+end
 
-
-
+after do
+  @message.delete :notice
+end
 
 get '/' do
   if session[:user]   # Weren't able to get it to work with a before filter but do we even need them?
@@ -15,14 +19,11 @@ end
 get '/users' do
   if session[:user] 
     @user = User.find_by_email(session[:user] )
+    @urls = Url.where(:user_id => @user.id)
     erb :users 
   else 
     redirect('/')
   end 
-end
-
-get '/hacker' do
-  erb :hacker
 end
 
 post '/logout' do
@@ -41,6 +42,13 @@ end
 
 post '/new' do
   @user = User.new params
-  @user.save
-  redirect to ('/')
+  if @user.save
+    redirect to ('/')
+  else
+    erb :index
+  end
 end
+
+
+
+
