@@ -9,7 +9,7 @@ after do
 end
 
 get '/' do
-  if session[:user]   # Weren't able to get it to work with a before filter but do we even need them?
+  if session[:user]
     redirect('users')
   else
     erb :index
@@ -17,33 +17,36 @@ get '/' do
 end
 
 get '/users' do
+  params.to_json
   if session[:user] 
     @user = User.find_by_email(session[:user] )
-    @urls = Url.where(:user_id => @user.id)
+    urls = Url.where(:user_id => @user.id) 
+    @urls = urls.sort! { |a,b| a.id <=> b.id } # To make sure they stay in the same order!
     erb :users 
   else 
     redirect('/')
   end 
 end
 
-post '/logout' do
+get '/logout' do
   session.clear
   redirect('/')
 end
 
 post '/login' do
-  if User.authenticate params[:email], params[:password]
+  if authenticate params[:email], params[:password]
     session[:user] = params[:email]
     redirect to ('/users')
   else
-    redirect to ('/hacker')
+    redirect to ('/')
   end
 end
 
 post '/new' do
   @user = User.new params
   if @user.save
-    redirect to ('/')
+    session[:user] = params[:email]
+    redirect to ('/users')
   else
     erb :index
   end

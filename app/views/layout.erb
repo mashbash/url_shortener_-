@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <!-- 
-    normalize.css removes cross-browser differences in defaults, e.g.,
-    differences in how form elements appear between Firefox and IE
-    See: http://necolas.github.com/normalize.css/
-  -->
-  <link rel="stylesheet" href="/css/normalize.css">
+  <head>
+    <link rel="stylesheet" href="/css/customize.css">
+    <link rel="stylesheet" href="/css/normalize.css">
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script src="//ajax.googleapis.com/ajax/libs/jqueryui/1.10.1/jquery-ui.min.js"></script>
+    <script src="/javascript/application.js"></script>
+    <title></title>
+  </head>
+    <body>
+      <div class="top-nav">
+        <h1><a href="/">Shorty</a></h1>
+          <div class="navbar-small">
+            <% if session[:user] %>
+            <a href="/logout">logout</a>
+            <% end %>
+          </div>
+      </div>
 
-  <title></title>
-</head>
-<body>
-  <%= yield %>
-</body>
+      <div class="container">
+          <%= yield %>
+      </div>
+    </body>
 </html>

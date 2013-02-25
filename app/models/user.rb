@@ -8,19 +8,12 @@ class User < ActiveRecord::Base
                                  :message => "needs a valid format dude!"}
   validates :password, :presence => true
 
-  def self.authenticate(email, password)
-    user = User.find_by_email(email)
-    if user == nil
-      false
-    elsif user.password == password
-      true
-    else
-      false
-    end
-  end
-
   has_many :urls
 
+  before_save :hash_password
+
+  def hash_password
+    self.password = Digest::MD5.hexdigest(self.password)
+  end
+
 end
-
-

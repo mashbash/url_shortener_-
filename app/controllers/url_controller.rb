@@ -18,11 +18,9 @@ post '/urls' do
   end
 end
 
-
-
-# get '/:short_url' do
-#   url = Url.find_by_short_url(params[:short_url])
-#   url.update_attributes :counter => url.counter + 1
-#   redirect to(url.long_url)
-#   # http://#{u.long_url}
-# end
+get '/url/:short_url' do
+  url = Url.find_by_short_url(params[:short_url])
+  url.counter += 1
+  url.save
+  redirect to(url.long_url)
+end
