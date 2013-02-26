@@ -52,6 +52,8 @@ post '/new' do
   end
 end
 
-
+# <% if @message[:notice] %>
+#         <%= @message[:notice] %>
+#       <% end %>
 
 
