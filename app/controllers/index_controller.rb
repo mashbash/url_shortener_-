@@ -18,10 +18,10 @@ end
 
 get '/users' do
   params.to_json
-  if session[:user] 
+  if session[:user]   
     @user = User.find_by_email(session[:user] )
-    urls = Url.where(:user_id => @user.id) 
-    @urls = urls.sort! { |a,b| a.id <=> b.id } # To make sure they stay in the same order!
+    @urls = Url.where(:user_id => @user.id).order('id desc').all
+    #@urls = urls.sort! { |a,b| b.id <=> a.id } # To make sure they stay in the same order!
     erb :users 
   else 
     redirect('/')
