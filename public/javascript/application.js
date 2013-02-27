@@ -16,7 +16,7 @@ var successFunction = function(data, status, xhr){
      $.ajax({
         type: this.method,
         url: this.action,
-        data: $(this).serialize(),
+        data: $(this).serialize(), //takes the json data sent from the server
         dataType: "json", //#request to server -> I want it back as JSON
         success: successFunction,
         error: function(){
